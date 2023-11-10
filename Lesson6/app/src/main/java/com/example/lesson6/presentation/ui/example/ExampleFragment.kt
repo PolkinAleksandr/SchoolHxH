@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.lesson6.R
+import com.example.lesson6.data.responsemodel.ResponseStates
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -46,11 +47,19 @@ class ExampleFragment : Fragment() {
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         recyclerView.adapter = adapter
         viewModel.login()
-        viewModel.exampleLiveData.observe(viewLifecycleOwner) {
-            Toast.makeText(context, it.profile.name, Toast.LENGTH_SHORT).show()
-        }
-        viewModel.errorLiveData.observe(viewLifecycleOwner) {
-            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+        viewModel.exampleLiveData.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is ResponseStates.Success -> {
+                    Toast.makeText(context, result.data.profile.name, Toast.LENGTH_SHORT).show()
+                }
+                is ResponseStates.Failure -> {
+                    Toast.makeText(context, result.e.message, Toast.LENGTH_SHORT).show()
+                }
+                is ResponseStates.Loading -> {
+                    Toast.makeText(context, "loading", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
         adapter.items.addAll(listOf("1", "2", "3", "4", "5", "6", "7"))
 
