@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lesson6.data.repository.PreferenceStorage
 import com.example.lesson6.data.responsemodel.ResponseLogin
+import com.example.lesson6.data.responsemodel.ResponseStates
 import com.example.lesson6.domain.usecase.LoginUseCase
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -15,18 +16,20 @@ class ExampleViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
 ) : ViewModel() {
 
-    private val _exampleLiveData = MutableLiveData<ResponseLogin>()
-    val exampleLiveData: LiveData<ResponseLogin> = _exampleLiveData
-
-    private val _errorLiveData = MutableLiveData<Exception>()
-    val errorLiveData: LiveData<Exception> = _errorLiveData
+    private val _exampleLiveData = MutableLiveData<ResponseStates<ResponseLogin>>()
+    val exampleLiveData: LiveData<ResponseStates<ResponseLogin>> = _exampleLiveData
 
     fun login() {
         viewModelScope.launch {
+            _exampleLiveData.value = ResponseStates.Loading()
             try {
-                _exampleLiveData.value = loginUseCase.execute("me@coldmail.org", "passWORD123?")
+                _exampleLiveData.value = ResponseStates.Success(
+                    loginUseCase.execute("me@coldmail.org", "passWORD123?")
+                )
             } catch (e: Exception) {
-                _errorLiveData.value = e
+                _exampleLiveData.value = ResponseStates.Failure(
+                    e
+                )
             }
         }
     }
