@@ -24,7 +24,7 @@ class ExampleViewModel @Inject constructor(
             _exampleLiveData.value = ResponseStates.Loading()
             try {
                 _exampleLiveData.value = ResponseStates.Success(
-                    loginUseCase.execute("me@coldmail.org", "passWORD123?")
+                    loginUseCase.execute("me@coldmail.org", "passWORD123")
                 )
             } catch (e: Exception) {
                 _exampleLiveData.value = ResponseStates.Failure(
