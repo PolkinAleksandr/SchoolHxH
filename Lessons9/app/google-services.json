@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "586178152654",
+    "project_id": "eight-1e12f",
+    "storage_bucket": "eight-1e12f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586178152654:android:e7ea5fa56c5c28de8ee89f",
+        "android_client_info": {
+          "package_name": "ru.panmin.lessoneight"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_nVe8IJ_IZlKp4ERxOg6gT9GonXlW-7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

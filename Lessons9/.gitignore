@@ -1,0 +1,16 @@
+/.idea
+/.idea/assetWizardSettings.xml
+/captures
+.externalNativeBuild
+.gradle
+/local.properties
+/.idea/workspace.xml
+.DS_Store
+/build
+.idea/
+*iml
+*.iml
+*/build
+gp_publisher_keys.json
+publisher-key.json
+.cxx
